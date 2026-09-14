@@ -1,7 +1,7 @@
 import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from models import db, Department, Course, User, LandingPageSection, LandingPageItem, ExaminationResult
+from .models import db, Department, Course, User, LandingPageSection, LandingPageItem, ExaminationResult
 
 # Configure paths
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -13,8 +13,16 @@ app = Flask(__name__)
 # Enable CORS so frontend can communicate with backend
 CORS(app)
 
-# Configure SQLite Database
-app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_PATH}'
+# Configure Database
+db_url = os.environ.get('DATABASE_URL')
+if db_url:
+    # SQLAlchemy 1.4+ requires postgresql:// instead of postgres://
+    if db_url.startswith("postgres://"):
+        db_url = db_url.replace("postgres://", "postgresql://", 1)
+    app.config['SQLALCHEMY_DATABASE_URI'] = db_url
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_PATH}'
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
