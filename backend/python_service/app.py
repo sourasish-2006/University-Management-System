@@ -6,8 +6,12 @@ from .models import db, Department, Course, User, LandingPageSection, LandingPag
 # Configure paths
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DB_DIR = os.path.join(BASE_DIR, 'database')
-os.makedirs(DB_DIR, exist_ok=True)
-DB_PATH = os.path.join(DB_DIR, 'ums.db')
+try:
+    os.makedirs(DB_DIR, exist_ok=True)
+    DB_PATH = os.path.join(DB_DIR, 'ums.db')
+except OSError:
+    # Fallback to /tmp which is writable in serverless environments like Vercel
+    DB_PATH = '/tmp/ums.db'
 
 app = Flask(__name__)
 # Enable CORS so frontend can communicate with backend
