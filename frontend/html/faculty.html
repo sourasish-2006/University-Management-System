@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Page</title>
+    <link rel="stylesheet" href="../css/faculty.css">
+</head>
+
+<body>
+    <div class="content-wrapper">
+        <div class="header-simple">
+            <div class="logo">UMS</div>
+            <a href="home.html" class="back-link">← Back to Home</a>
+        </div>
+
+        <h1>Welcome to Faculty Page</h1>
+        <p>Please select an option from your account menu below.</p>
+
+        <!-- Students View -->
+        <div id="students-view" class="feature-view hidden">
+            <h2>Your Students</h2>
+            <div class="info-card">
+                <p>List of students enrolled in your courses.</p>
+                <ul>
+                    <li>Jane Doe - Database Systems</li>
+                    <li>Mark Smith - Software Engineering</li>
+                </ul>
+            </div>
+            <button class="btn-back-menu">Back to Menu</button>
+        </div>
+
+        <!-- Settings View -->
+        <div id="settings-view" class="feature-view hidden">
+            <h2>Profile Settings</h2>
+            <div class="info-card">
+                <form id="settings-form" style="display: flex; flex-direction: column; gap: 10px; text-align: left;">
+                    <label for="new-username" style="font-weight: 600; color: #475569;">New Username</label>
+                    <input type="text" id="new-username" placeholder="Leave blank to keep current" style="padding: 10px; border: 1px solid #cbd5e1; border-radius: 4px;">
+                    
+                    <label for="new-password" style="font-weight: 600; color: #475569;">New Password</label>
+                    <input type="password" id="new-password" placeholder="Leave blank to keep current" style="padding: 10px; border: 1px solid #cbd5e1; border-radius: 4px;">
+                    
+                    <button type="submit" style="background: #3b82f6; color: white; border: none; padding: 10px; border-radius: 4px; cursor: pointer; font-weight: 600; margin-top: 10px;">Update Credentials</button>
+                    <div id="settings-msg" class="status-msg" style="margin-top: 10px; font-size: 14px; font-weight: 500;"></div>
+                </form>
+            </div>
+            <button class="btn-back-menu">Back to Menu</button>
+        </div>
+
+        <!-- Upload Results View -->
+        <div id="upload-results-view" class="feature-view hidden">
+            <h2>Upload Examination Results</h2>
+            <div class="info-card">
+                <form id="results-form" style="display: flex; flex-direction: column; gap: 10px; text-align: left;">
+                    
+                    <label for="res-level" style="font-weight: 600; color: #475569;">Parent Level (UG/PG)</label>
+                    <select id="res-level" required style="padding: 10px; border: 1px solid #cbd5e1; border-radius: 4px; font-family: inherit;">
+                        <option value="">Select Level</option>
+                        <option value="UG">Undergraduate (UG)</option>
+                        <option value="PG">Postgraduate (PG)</option>
+                    </select>
+
+                    <label for="res-program" style="font-weight: 600; color: #475569;">Program / Department</label>
+                    <select id="res-program" required style="padding: 10px; border: 1px solid #cbd5e1; border-radius: 4px; font-family: inherit;">
+                        <option value="">Select Program</option>
+                        <option value="BSc">B.Sc.</option>
+                        <option value="BA">B.A.</option>
+                        <option value="BTech">B.Tech.</option>
+                        <option value="BCom">B.Com.</option>
+                        <option value="BALLB">B.A. LL.B.</option>
+                        <option value="MSc">M.Sc.</option>
+                        <option value="MTech">M.Tech.</option>
+                        <option value="MBA">MBA</option>
+                    </select>
+                    
+                    <label for="res-title" style="font-weight: 600; color: #475569;">Result Title (e.g. Semester 1 Final)</label>
+                    <input type="text" id="res-title" required placeholder="Enter result title" style="padding: 10px; border: 1px solid #cbd5e1; border-radius: 4px; font-family: inherit;">
+                    
+                    <label for="res-link" style="font-weight: 600; color: #475569;">Result Link (Drive URL, PDF Link)</label>
+                    <input type="url" id="res-link" required placeholder="https://..." style="padding: 10px; border: 1px solid #cbd5e1; border-radius: 4px; font-family: inherit;">
+                    
+                    <button type="submit" style="background: #3b82f6; color: white; border: none; padding: 10px; border-radius: 4px; cursor: pointer; font-weight: 600; margin-top: 10px;">Upload Result</button>
+                    <div id="results-msg" class="status-msg" style="margin-top: 10px; font-size: 14px; font-weight: 500;"></div>
+                </form>
+            </div>
+            <button class="btn-back-menu">Back to Menu</button>
+        </div>
+
+        <div class="menu-grid">
+            <a href="#dashboard" class="menu-card">
+                <h3>Dashboard</h3>
+            </a>
+            <a href="#attendance" class="menu-card">
+                <h3>Attendance</h3>
+            </a>
+            <a href="#faculty-profile" class="menu-card">
+                <h3>Faculty Profile</h3>
+            </a>
+            <a href="#students" class="menu-card">
+                <h3>Students</h3>
+            </a>
+            <a href="#upload-results" class="menu-card">
+                <h3>Upload Results</h3>
+            </a>
+            <a href="#settings" class="menu-card">
+                <h3>Settings</h3>
+            </a>
+            <a href="home.html" class="menu-card logout">
+                <h3>Logout</h3>
+            </a>
+        </div>
+    </div>
+    
+    <script src="../js/auth.js"></script>
+    <script src="../js/faculty.js"></script>
+</body>
+
+</html>

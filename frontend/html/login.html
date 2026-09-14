@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMS - Login</title>
+    <!-- Modern Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/home.css">
+</head>
+<body>
+    <nav class="main-nav">
+        <ul class="nav-links">
+            <li><a href="home.html">← Back to Home</a></li>
+        </ul>
+    </nav>
+
+    <main class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Select Portal</h1>
+            <p class="hero-subtitle">Login to access your University Management System dashboard.</p>
+        </div>
+
+        <div class="login-container">
+            <!-- Student Login Card -->
+            <div class="login-card">
+                <h2>Student Login</h2>
+                <form>
+                    <label for="student-user">Username</label>
+                    <input type="text" id="student-user" name="username" placeholder="Enter student ID" required>
+                    <label for="student-pass">Password</label>
+                    <input type="password" id="student-pass" name="password" placeholder="Enter password" required>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+
+            <!-- Faculty Login Card -->
+            <div class="login-card">
+                <h2>Faculty Login</h2>
+                <form>
+                    <label for="faculty-user">Username</label>
+                    <input type="text" id="faculty-user" name="username" placeholder="Enter faculty ID" required>
+                    <label for="faculty-pass">Password</label>
+                    <input type="password" id="faculty-pass" name="password" placeholder="Enter password" required>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+
+            <!-- Admin Login Card -->
+            <div class="login-card">
+                <h2>Admin Login</h2>
+                <form>
+                    <label for="admin-user">Username</label>
+                    <input type="text" id="admin-user" name="username" placeholder="Enter admin ID" required>
+                    <label for="admin-pass">Password</label>
+                    <input type="password" id="admin-pass" name="password" placeholder="Enter password" required>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/login.js"></script>
+</body>
+</html>

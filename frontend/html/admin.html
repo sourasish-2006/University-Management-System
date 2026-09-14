@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintainer Portal</title>
+    <!-- Modern Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/student.css"> <!-- Reusing structure styles -->
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; margin: 0; padding: 20px; color: #333; }
+        .admin-wrapper { max-width: 900px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e2e8f0; padding-bottom: 15px; margin-bottom: 30px; }
+        .header h1 { font-family: 'Outfit', sans-serif; color: #0A2540; margin: 0; }
+        .nav-links a { text-decoration: none; color: #3b82f6; font-weight: 600; margin-left: 15px; }
+        
+        .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; }
+        .card h2 { font-family: 'Outfit', sans-serif; color: #0A2540; font-size: 1.2rem; margin-top: 0; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px; margin-bottom: 15px; }
+        
+        form { display: flex; flex-direction: column; gap: 10px; }
+        form label { font-size: 14px; font-weight: 500; color: #475569; }
+        form input, form select { padding: 10px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 14px; font-family: 'Inter', sans-serif; }
+        form button { background: #3b82f6; color: white; border: none; padding: 10px; border-radius: 4px; cursor: pointer; font-weight: 600; margin-top: 10px; }
+        form button:hover { background: #2563eb; }
+        
+        .list-section { margin-top: 30px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 10px; border: 1px solid #e2e8f0; text-align: left; font-size: 14px; }
+        th { background: #f1f5f9; font-weight: 600; }
+        
+        .status-msg { margin-top: 10px; font-size: 14px; font-weight: 500; }
+        .success { color: #10b981; }
+        .error { color: #ef4444; }
+    </style>
+</head>
+<body>
+
+    <div class="admin-wrapper">
+        <div class="header">
+            <h1>Maintainer Portal</h1>
+            <div class="nav-links">
+                <a href="login.html">Logout</a>
+            </div>
+        </div>
+
+        <p style="color: #64748b; margin-bottom: 30px;">Add and manage core university information here. Data is saved directly to the SQLite database via the Flask backend.</p>
+
+        <div class="dashboard-grid">
+            <!-- Add Department Form -->
+            <div class="card">
+                <h2>Add Department</h2>
+                <form id="dept-form">
+                    <label for="dept-name">Department Name</label>
+                    <input type="text" id="dept-name" required placeholder="e.g. Computer Science">
+                    
+                    <label for="dept-head">Head of Department</label>
+                    <input type="text" id="dept-head" placeholder="e.g. Dr. Alan Turing">
+                    
+                    <button type="submit">Save Department</button>
+                    <div id="dept-msg" class="status-msg"></div>
+                </form>
+            </div>
+
+            <!-- Add Course Form -->
+            <div class="card">
+                <h2>Add Course</h2>
+                <form id="course-form">
+                    <label for="course-code">Course Code</label>
+                    <input type="text" id="course-code" required placeholder="e.g. CS101">
+                    
+                    <label for="course-title">Course Title</label>
+                    <input type="text" id="course-title" required placeholder="e.g. Intro to Programming">
+                    
+                    <label for="course-credits">Credits</label>
+                    <input type="number" id="course-credits" required min="1" max="5" value="3">
+                    
+                    <label for="course-dept">Department</label>
+                    <select id="course-dept" required>
+                        <option value="">Loading departments...</option>
+                    </select>
+
+                    <button type="submit">Save Course</button>
+                    <div id="course-msg" class="status-msg"></div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Data Viewer -->
+        <div class="dashboard-grid" style="margin-top: 20px;">
+            <div class="card">
+                <h2>Existing Departments</h2>
+                <table>
+                    <thead>
+                        <tr><th>ID</th><th>Name</th><th>Head</th></tr>
+                    </thead>
+                    <tbody id="dept-list">
+                        <tr><td colspan="3">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <h2>Existing Courses</h2>
+                <table>
+                    <thead>
+                        <tr><th>Code</th><th>Title</th><th>Credits</th></tr>
+                    </thead>
+                    <tbody id="course-list">
+                        <tr><td colspan="3">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Site Content Management (CMS) -->
+        <div class="dashboard-grid" style="margin-top: 20px;">
+            <div class="card">
+                <h2>Add Landing Page Section</h2>
+                <form id="cms-section-form">
+                    <label for="section-title">Section Title</label>
+                    <input type="text" id="section-title" required placeholder="e.g. Admission">
+                    
+                    <label for="section-order">Display Order</label>
+                    <input type="number" id="section-order" value="0">
+                    
+                    <button type="submit">Save Section</button>
+                    <div id="cms-section-msg" class="status-msg"></div>
+                </form>
+                
+                <h3 style="margin-top:20px; font-family:'Outfit', sans-serif;">Existing Sections</h3>
+                <table>
+                    <thead><tr><th>ID</th><th>Title</th><th>Order</th><th>Action</th></tr></thead>
+                    <tbody id="cms-section-list"><tr><td colspan="4">Loading...</td></tr></tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <h2>Add Section Item (Link)</h2>
+                <form id="cms-item-form">
+                    <label for="item-section">Parent Section</label>
+                    <select id="item-section" required>
+                        <option value="">Loading sections...</option>
+                    </select>
+
+                    <label for="item-title">Item Title</label>
+                    <input type="text" id="item-title" required placeholder="e.g. B.S. Computer Science">
+                    
+                    <label for="item-link">Link URL</label>
+                    <input type="text" id="item-link" required placeholder="e.g. #bscs">
+                    
+                    <label for="item-order">Display Order</label>
+                    <input type="number" id="item-order" value="0">
+                    
+                    <button type="submit">Save Item</button>
+                    <div id="cms-item-msg" class="status-msg"></div>
+                </form>
+                
+                <h3 style="margin-top:20px; font-family:'Outfit', sans-serif;">Existing Items</h3>
+                <table>
+                    <thead><tr><th>Title</th><th>Link</th><th>Section ID</th><th>Action</th></tr></thead>
+                    <tbody id="cms-item-list"><tr><td colspan="4">Loading...</td></tr></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Profile Settings -->
+        <div class="dashboard-grid" style="margin-top: 20px;">
+            <div class="card">
+                <h2>Profile Settings</h2>
+                <form id="settings-form">
+                    <label for="new-username">New Username</label>
+                    <input type="text" id="new-username" placeholder="Leave blank to keep current">
+                    
+                    <label for="new-password">New Password</label>
+                    <input type="password" id="new-password" placeholder="Leave blank to keep current">
+                    
+                    <button type="submit">Update Credentials</button>
+                    <div id="settings-msg" class="status-msg"></div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/admin.js"></script>
+    <script src="../js/admin_cms.js"></script>
+</body>
+</html>

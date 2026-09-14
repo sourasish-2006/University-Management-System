@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Page</title>
+    <link rel="stylesheet" href="../css/student.css">
+</head>
+
+<body>
+
+    <div class="content-wrapper">
+        <div class="header-simple">
+            <div class="logo">UMS</div>
+            <a href="home.html" class="back-link">← Back to Home</a>
+        </div>
+        
+        <h1>Welcome to Student Page</h1>
+        <p>Please select an option from your account menu below.</p>
+
+        <div class="menu-grid" id="main-menu">
+            <a href="#dashboard" class="menu-card">
+                <h3>Dashboard</h3>
+            </a>
+            <a href="#results" class="menu-card">
+                <h3>Results</h3>
+            </a>
+            <a href="#attendance" class="menu-card">
+                <h3>Attendance</h3>
+            </a>
+            <a href="#settings" class="menu-card">
+                <h3>Settings</h3>
+            </a>
+            <a href="home.html" class="menu-card logout">
+                <h3>Logout</h3>
+            </a>
+        </div>
+
+        <!-- Dashboard View -->
+        <div id="dashboard-view" class="feature-view hidden">
+            <h2>Your Dashboard</h2>
+            <div class="info-card">
+                <p><strong>Program:</strong> Bachelor of Technology</p>
+                <p><strong>Semester:</strong> 6th Semester</p>
+                <p><strong>Status:</strong> Enrolled</p>
+            </div>
+            <button class="btn-back-menu">Back to Menu</button>
+        </div>
+
+        <!-- Results View -->
+        <div id="results-view" class="feature-view hidden">
+            <h2>Exam Results</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Grade</th>
+                        <th>Credits</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Data Structures</td>
+                        <td>A</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>Database Management</td>
+                        <td>B+</td>
+                        <td>3</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn-back-menu">Back to Menu</button>
+        </div>
+
+        <!-- Attendance View -->
+        <div id="attendance-view" class="feature-view hidden">
+            <h2>Attendance Record</h2>
+            <div class="progress-container">
+                <div class="progress-bar" style="width: 85%;">85%</div>
+            </div>
+            <p>You have attended 85% of your classes this semester.</p>
+            <button class="btn-back-menu">Back to Menu</button>
+        </div>
+
+        <!-- Settings View -->
+        <div id="settings-view" class="feature-view hidden">
+            <h2>Profile Settings</h2>
+            <div class="info-card">
+                <form id="settings-form" style="display: flex; flex-direction: column; gap: 10px; text-align: left;">
+                    <label for="new-username" style="font-weight: 600; color: #475569;">New Username</label>
+                    <input type="text" id="new-username" placeholder="Leave blank to keep current" style="padding: 10px; border: 1px solid #cbd5e1; border-radius: 4px;">
+                    
+                    <label for="new-password" style="font-weight: 600; color: #475569;">New Password</label>
+                    <input type="password" id="new-password" placeholder="Leave blank to keep current" style="padding: 10px; border: 1px solid #cbd5e1; border-radius: 4px;">
+                    
+                    <button type="submit" style="background: #3b82f6; color: white; border: none; padding: 10px; border-radius: 4px; cursor: pointer; font-weight: 600; margin-top: 10px;">Update Credentials</button>
+                    <div id="settings-msg" class="status-msg" style="margin-top: 10px; font-size: 14px; font-weight: 500;"></div>
+                </form>
+            </div>
+            <button class="btn-back-menu">Back to Menu</button>
+        </div>
+
+    </div>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/student.js"></script>
+</body>
+
+</html>

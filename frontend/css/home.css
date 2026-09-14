@@ -1,0 +1,311 @@
+/* --- Base Styles & Typography --- */
+:root {
+    --primary-font: 'Inter', sans-serif;
+    --heading-font: 'Outfit', sans-serif;
+    --accent: #1e40af; /* Corporate deep blue */
+    --accent-hover: #1e3a8a;
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --card-border: #e2e8f0;
+    --text-main: #0f172a;
+    --text-muted: #475569;
+}
+
+body {
+    font-family: var(--primary-font);
+    background-color: var(--bg-color);
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(30, 64, 175, 0.08) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(56, 189, 248, 0.08) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(30, 64, 175, 0.08) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, rgba(56, 189, 248, 0.08) 0px, transparent 50%);
+    background-attachment: fixed;
+    background-size: cover;
+    color: var(--text-main);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+h1, h2, h3 {
+    font-family: var(--heading-font);
+    margin: 0;
+}
+
+/* --- Navbar --- */
+.main-nav {
+    background: #ffffff;
+    border-bottom: 1px solid var(--card-border);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 0 40px;
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.nav-links > li {
+    position: relative;
+}
+
+.nav-links > li > a {
+    display: block;
+    padding: 20px 15px;
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+.nav-links > li:hover > a {
+    color: var(--accent);
+}
+
+/* Dropdown */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #ffffff;
+    min-width: 220px;
+    border: 1px solid var(--card-border);
+    background-color: rgba(255, 255, 255, 0.95);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+    z-index: 1;
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    overflow: visible; /* To allow nested dropdowns to show */
+}
+.dropdown-content li {
+    display: block;
+    margin: 0;
+}
+.dropdown-content li a {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.2s;
+}
+.dropdown-content li a:hover {
+    background-color: rgba(59, 130, 246, 0.1);
+    color: var(--accent);
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Nested Dropdowns */
+.nested-dropdown {
+    position: relative;
+}
+
+.nested-dropdown-content {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%; /* Displays directly beside the parent li */
+    background: #ffffff;
+    min-width: 200px;
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    overflow: hidden;
+    list-style: none;
+    padding: 8px 0;
+    margin: 0;
+    margin-left: 5px; /* Slight gap */
+    box-shadow: 5px 10px 25px rgba(0,0,0,0.1);
+    animation: fadeInSide 0.25s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    opacity: 0;
+    transform: translateX(-5px);
+    z-index: 200;
+}
+
+/* Invisible bridge to prevent hover loss when moving mouse diagonally */
+.nested-dropdown-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -20px; /* Extends into the gap */
+    width: 20px;
+    height: 100%;
+    background: transparent;
+    z-index: 201;
+}
+
+@keyframes fadeInSide {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.nested-dropdown:hover .nested-dropdown-content {
+    display: block;
+}
+
+.nested-dropdown-content li a {
+    color: var(--text-muted);
+    padding: 10px 20px;
+    text-decoration: none;
+    display: block;
+    font-size: 13.5px;
+    transition: all 0.2s ease;
+}
+
+.nested-dropdown-content li a:hover {
+    background: #f1f5f9;
+    color: var(--accent);
+    padding-left: 25px;
+}
+
+/* --- Hero Section --- */
+.hero-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+}
+
+.hero-content {
+    text-align: center;
+    margin-bottom: 60px;
+    animation: fadeUp 0.8s ease forwards;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 15px;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* --- Login Cards --- */
+.login-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1100px;
+}
+
+.login-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 40px 30px;
+    width: 100%;
+    max-width: 320px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(to right, var(--accent), #c084fc);
+    opacity: 0.8;
+}
+
+.login-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    border-color: var(--accent);
+}
+
+.login-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    text-align: center;
+    color: var(--text-main);
+    letter-spacing: 0.5px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+form input {
+    background: #fff;
+    border: 1px solid var(--card-border);
+    padding: 14px 16px;
+    margin-bottom: 25px;
+    border-radius: 6px;
+    font-size: 15px;
+    color: var(--text-main);
+    font-family: var(--primary-font);
+    transition: all 0.3s ease;
+}
+
+form input::placeholder {
+    color: #94a3b8;
+}
+
+form input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+}
+
+form button {
+    background: var(--accent);
+    color: #fff;
+    padding: 15px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: var(--primary-font);
+    transition: all 0.3s ease;
+}
+
+form button:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(30, 64, 175, 0.2);
+}
