@@ -3,6 +3,7 @@
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/index.py" },
     { "source": "/", "destination": "/frontend/html/home.html" },
-    { "source": "/(.*)", "destination": "/frontend/$1" }
+    { "source": "/(css|js|assets)/(.*)", "destination": "/frontend/$1/$2" },
+    { "source": "/(.*\\.html)", "destination": "/frontend/html/$1" }
   ]
 }
