@@ -10,12 +10,15 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from backend.python_service.models import db, Department, Course, User, LandingPageSection, LandingPageItem, ExaminationResult
 DB_DIR = os.path.join(BASE_DIR, 'database')
-try:
-    os.makedirs(DB_DIR, exist_ok=True)
-    DB_PATH = os.path.join(DB_DIR, 'ums.db')
-except OSError:
-    # Fallback to /tmp which is writable in serverless environments like Vercel
+if os.environ.get('VERCEL') == '1':
+    # Vercel is read-only, must use /tmp
     DB_PATH = '/tmp/ums.db'
+else:
+    try:
+        os.makedirs(DB_DIR, exist_ok=True)
+        DB_PATH = os.path.join(DB_DIR, 'ums.db')
+    except OSError:
+        DB_PATH = '/tmp/ums.db'
 
 app = Flask(__name__)
 # Enable CORS so frontend can communicate with backend
