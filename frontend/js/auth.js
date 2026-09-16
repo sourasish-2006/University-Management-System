@@ -7,7 +7,7 @@ const Auth = {
     // Perform real login against Flask API
     login: async function(role, username, password) {
         try {
-            const res = await fetch('http://localhost:5000/api/login', {
+            const res = await fetch('/api/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password })
@@ -42,7 +42,7 @@ const Auth = {
 
     updateProfile: async function(userId, newUsername, newPassword) {
         try {
-            const res = await fetch('http://localhost:5000/api/user/update', {
+            const res = await fetch('/api/user/update', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ user_id: userId, new_username: newUsername, new_password: newPassword })

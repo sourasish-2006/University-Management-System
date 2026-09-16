@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const link = document.getElementById('res-link').value;
             
             try {
-                const res = await fetch('http://localhost:5000/api/faculty/results', {
+                const res = await fetch('/api/faculty/results', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ parent_level: level, program: program, title: title, result_link: link })

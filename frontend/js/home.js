@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
 async function loadCMSNavigation() {
     try {
         const [cmsRes, examRes] = await Promise.all([
-            fetch('http://localhost:5000/api/public/landing-content'),
-            fetch('http://localhost:5000/api/public/results')
+            fetch('/api/public/landing-content'),
+            fetch('/api/public/results')
         ]);
         
         if (!cmsRes.ok || !examRes.ok) throw new Error("Failed to fetch data");

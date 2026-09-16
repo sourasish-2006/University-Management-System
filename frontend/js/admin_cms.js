@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const msg = document.getElementById('cms-section-msg');
 
         try {
-            const res = await fetch('http://localhost:5000/api/admin/landing-content/section', {
+            const res = await fetch('/api/admin/landing-content/section', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ title, order: parseInt(order) || 0 })
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const msg = document.getElementById('cms-item-msg');
 
         try {
-            const res = await fetch('http://localhost:5000/api/admin/landing-content/item', {
+            const res = await fetch('/api/admin/landing-content/item', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ title, link, section_id: parseInt(section_id), order: parseInt(order) || 0 })
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function loadCMSData() {
     try {
-        const res = await fetch('http://localhost:5000/api/public/landing-content');
+        const res = await fetch('/api/public/landing-content');
         if (!res.ok) throw new Error("Failed to fetch CMS content");
         
         const sections = await res.json();
@@ -117,7 +117,7 @@ async function loadCMSData() {
 async function deleteSection(id) {
     if (!confirm("Are you sure? This will delete all items inside this section too!")) return;
     try {
-        const res = await fetch(`http://localhost:5000/api/admin/landing-content/section/${id}`, { method: 'DELETE' });
+        const res = await fetch(`/api/admin/landing-content/section/${id}`, { method: 'DELETE' });
         if (res.ok) {
             loadCMSData();
         } else {
@@ -131,7 +131,7 @@ async function deleteSection(id) {
 async function deleteItem(id) {
     if (!confirm("Delete this item?")) return;
     try {
-        const res = await fetch(`http://localhost:5000/api/admin/landing-content/item/${id}`, { method: 'DELETE' });
+        const res = await fetch(`/api/admin/landing-content/item/${id}`, { method: 'DELETE' });
         if (res.ok) {
             loadCMSData();
         } else {
