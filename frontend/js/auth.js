@@ -1,3 +1,5 @@
+window.API_BASE = (window.location.protocol === 'file:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') ? 'http://localhost:5000' : '';
+
 /**
  * auth.js
  * Mock Authentication module for University Management System

@@ -1,4 +1,4 @@
-const API_BASE = '/api';
+const API_BASE = window.API_BASE + '/api';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Load initial data

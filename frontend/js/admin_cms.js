@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function loadCMSData() {
     try {
-        const res = await fetch('/api/public/landing-content');
+        const res = await fetch(window.API_BASE + '/api/public/landing-content');
         if (!res.ok) throw new Error("Failed to fetch CMS content");
         
         const sections = await res.json();

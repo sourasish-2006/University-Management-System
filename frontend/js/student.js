@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function fetchAvailableCourses() {
     try {
-        const res = await fetch('/api/courses');
+        const res = await fetch(window.API_BASE + '/api/courses');
         if (res.ok) {
             const courses = await res.json();
             const tbody = document.querySelector('#results-view tbody');
